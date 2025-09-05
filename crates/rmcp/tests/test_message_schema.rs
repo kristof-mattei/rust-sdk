@@ -48,7 +48,7 @@ mod tests {
 
     #[test]
     fn test_client_json_rpc_message_schema() {
-        let settings = SchemaSettings::draft07();
+        let settings = SchemaSettings::draft2020_12();
         let schema = settings
             .into_generator()
             .into_root_schema_for::<ClientJsonRpcMessage>();
@@ -63,7 +63,7 @@ mod tests {
 
     #[test]
     fn test_server_json_rpc_message_schema() {
-        let settings = SchemaSettings::draft07();
+        let settings = SchemaSettings::draft2020_12();
         let schema = settings
             .into_generator()
             .into_root_schema_for::<ServerJsonRpcMessage>();

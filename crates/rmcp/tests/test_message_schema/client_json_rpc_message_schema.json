@@ -1,49 +1,33 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "JsonRpcMessage",
   "description": "Represents any JSON-RPC message that can be sent or received.\n\nThis enum covers all possible message types in the JSON-RPC protocol:\nindividual requests/responses, notifications, batch operations, and errors.\nIt serves as the top-level message container for MCP communication.",
   "anyOf": [
     {
       "description": "A single request expecting a response",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JsonRpcRequest"
-        }
-      ]
+      "$ref": "#/$defs/JsonRpcRequest"
     },
     {
       "description": "A response to a previous request",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JsonRpcResponse"
-        }
-      ]
+      "$ref": "#/$defs/JsonRpcResponse"
     },
     {
       "description": "A one-way notification (no response expected)",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JsonRpcNotification"
-        }
-      ]
+      "$ref": "#/$defs/JsonRpcNotification"
     },
     {
       "description": "An error response",
-      "allOf": [
-        {
-          "$ref": "#/definitions/JsonRpcError"
-        }
-      ]
+      "$ref": "#/$defs/JsonRpcError"
     }
   ],
-  "definitions": {
+  "$defs": {
     "Annotated": {
       "type": "object",
       "properties": {
         "annotations": {
           "anyOf": [
             {
-              "$ref": "#/definitions/Annotations"
+              "$ref": "#/$defs/Annotations"
             },
             {
               "type": "null"
@@ -60,11 +44,7 @@
               "const": "text"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/RawTextContent"
-            }
-          ],
+          "$ref": "#/$defs/RawTextContent",
           "required": [
             "type"
           ]
@@ -77,11 +57,7 @@
               "const": "image"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/RawImageContent"
-            }
-          ],
+          "$ref": "#/$defs/RawImageContent",
           "required": [
             "type"
           ]
@@ -94,11 +70,7 @@
               "const": "resource"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/RawEmbeddedResource"
-            }
-          ],
+          "$ref": "#/$defs/RawEmbeddedResource",
           "required": [
             "type"
           ]
@@ -111,11 +83,7 @@
               "const": "audio"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/Annotated2"
-            }
-          ],
+          "$ref": "#/$defs/Annotated2",
           "required": [
             "type"
           ]
@@ -128,11 +96,7 @@
               "const": "resource_link"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/RawResource"
-            }
-          ],
+          "$ref": "#/$defs/RawResource",
           "required": [
             "type"
           ]
@@ -145,7 +109,7 @@
         "annotations": {
           "anyOf": [
             {
-              "$ref": "#/definitions/Annotations"
+              "$ref": "#/$defs/Annotations"
             },
             {
               "type": "null"
@@ -173,7 +137,7 @@
             "null"
           ],
           "items": {
-            "$ref": "#/definitions/Role"
+            "$ref": "#/$defs/Role"
           }
         },
         "lastModified": {
@@ -248,7 +212,7 @@
           ]
         },
         "requestId": {
-          "$ref": "#/definitions/NumberOrString"
+          "$ref": "#/$defs/NumberOrString"
         }
       },
       "required": [
@@ -264,7 +228,7 @@
           "description": "Capability to handle elicitation requests from servers for interactive user input",
           "anyOf": [
             {
-              "$ref": "#/definitions/ElicitationCapability"
+              "$ref": "#/$defs/ElicitationCapability"
             },
             {
               "type": "null"
@@ -284,7 +248,7 @@
         "roots": {
           "anyOf": [
             {
-              "$ref": "#/definitions/RootsCapabilities"
+              "$ref": "#/$defs/RootsCapabilities"
             },
             {
               "type": "null"
@@ -303,16 +267,16 @@
     "ClientResult": {
       "anyOf": [
         {
-          "$ref": "#/definitions/CreateMessageResult"
+          "$ref": "#/$defs/CreateMessageResult"
         },
         {
-          "$ref": "#/definitions/ListRootsResult"
+          "$ref": "#/$defs/ListRootsResult"
         },
         {
-          "$ref": "#/definitions/CreateElicitationResult"
+          "$ref": "#/$defs/CreateElicitationResult"
         },
         {
-          "$ref": "#/definitions/EmptyObject"
+          "$ref": "#/$defs/EmptyObject"
         }
       ]
     },
@@ -325,10 +289,10 @@
       "type": "object",
       "properties": {
         "argument": {
-          "$ref": "#/definitions/ArgumentInfo"
+          "$ref": "#/$defs/ArgumentInfo"
         },
         "ref": {
-          "$ref": "#/definitions/Reference"
+          "$ref": "#/$defs/Reference"
         }
       },
       "required": [
@@ -342,11 +306,7 @@
       "properties": {
         "action": {
           "description": "The user's decision on how to handle the elicitation request",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ElicitationAction"
-            }
-          ]
+          "$ref": "#/$defs/ElicitationAction"
         },
         "content": {
           "description": "The actual data provided by the user, if they accepted the request.\nMust conform to the JSON schema specified in the original request.\nOnly present when action is Accept."
@@ -362,11 +322,7 @@
       "properties": {
         "content": {
           "description": "The actual content of the message (text, image, etc.)",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Annotated"
-            }
-          ]
+          "$ref": "#/$defs/Annotated"
         },
         "model": {
           "description": "The identifier of the model that generated the response",
@@ -374,11 +330,7 @@
         },
         "role": {
           "description": "The role of the message sender (User or Assistant)",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Role"
-            }
-          ]
+          "$ref": "#/$defs/Role"
         },
         "stopReason": {
           "description": "The reason why generation stopped (e.g., \"endTurn\", \"maxTokens\")",
@@ -442,11 +394,7 @@
       "properties": {
         "code": {
           "description": "The error type that occurred (using standard JSON-RPC error codes)",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ErrorCode"
-            }
-          ]
+          "$ref": "#/$defs/ErrorCode"
         },
         "data": {
           "description": "Additional information about the error. The value of this member is defined by the\nsender (e.g. detailed error information, nested errors etc.)."
@@ -506,27 +454,15 @@
       "properties": {
         "capabilities": {
           "description": "The capabilities this client supports (sampling, roots, etc.)",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ClientCapabilities"
-            }
-          ]
+          "$ref": "#/$defs/ClientCapabilities"
         },
         "clientInfo": {
           "description": "Information about the client implementation",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Implementation"
-            }
-          ]
+          "$ref": "#/$defs/Implementation"
         },
         "protocolVersion": {
           "description": "The MCP protocol version this client supports",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ProtocolVersion"
-            }
-          ]
+          "$ref": "#/$defs/ProtocolVersion"
         }
       },
       "required": [
@@ -549,13 +485,13 @@
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/ErrorData"
+          "$ref": "#/$defs/ErrorData"
         },
         "id": {
-          "$ref": "#/definitions/NumberOrString"
+          "$ref": "#/$defs/NumberOrString"
         },
         "jsonrpc": {
-          "$ref": "#/definitions/JsonRpcVersion2_0"
+          "$ref": "#/$defs/JsonRpcVersion2_0"
         }
       },
       "required": [
@@ -568,21 +504,21 @@
       "type": "object",
       "properties": {
         "jsonrpc": {
-          "$ref": "#/definitions/JsonRpcVersion2_0"
+          "$ref": "#/$defs/JsonRpcVersion2_0"
         }
       },
       "anyOf": [
         {
-          "$ref": "#/definitions/Notification"
+          "$ref": "#/$defs/Notification"
         },
         {
-          "$ref": "#/definitions/Notification2"
+          "$ref": "#/$defs/Notification2"
         },
         {
-          "$ref": "#/definitions/NotificationNoParam"
+          "$ref": "#/$defs/NotificationNoParam"
         },
         {
-          "$ref": "#/definitions/NotificationNoParam2"
+          "$ref": "#/$defs/NotificationNoParam2"
         }
       ],
       "required": [
@@ -593,51 +529,51 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/NumberOrString"
+          "$ref": "#/$defs/NumberOrString"
         },
         "jsonrpc": {
-          "$ref": "#/definitions/JsonRpcVersion2_0"
+          "$ref": "#/$defs/JsonRpcVersion2_0"
         }
       },
       "anyOf": [
         {
-          "$ref": "#/definitions/RequestNoParam"
+          "$ref": "#/$defs/RequestNoParam"
         },
         {
-          "$ref": "#/definitions/Request"
+          "$ref": "#/$defs/Request"
         },
         {
-          "$ref": "#/definitions/Request2"
+          "$ref": "#/$defs/Request2"
         },
         {
-          "$ref": "#/definitions/Request3"
+          "$ref": "#/$defs/Request3"
         },
         {
-          "$ref": "#/definitions/Request4"
+          "$ref": "#/$defs/Request4"
         },
         {
-          "$ref": "#/definitions/RequestOptionalParam"
+          "$ref": "#/$defs/RequestOptionalParam"
         },
         {
-          "$ref": "#/definitions/RequestOptionalParam2"
+          "$ref": "#/$defs/RequestOptionalParam2"
         },
         {
-          "$ref": "#/definitions/RequestOptionalParam3"
+          "$ref": "#/$defs/RequestOptionalParam3"
         },
         {
-          "$ref": "#/definitions/Request5"
+          "$ref": "#/$defs/Request5"
         },
         {
-          "$ref": "#/definitions/Request6"
+          "$ref": "#/$defs/Request6"
         },
         {
-          "$ref": "#/definitions/Request7"
+          "$ref": "#/$defs/Request7"
         },
         {
-          "$ref": "#/definitions/Request8"
+          "$ref": "#/$defs/Request8"
         },
         {
-          "$ref": "#/definitions/RequestOptionalParam4"
+          "$ref": "#/$defs/RequestOptionalParam4"
         }
       ],
       "required": [
@@ -649,13 +585,13 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/NumberOrString"
+          "$ref": "#/$defs/NumberOrString"
         },
         "jsonrpc": {
-          "$ref": "#/definitions/JsonRpcVersion2_0"
+          "$ref": "#/$defs/JsonRpcVersion2_0"
         },
         "result": {
-          "$ref": "#/definitions/ClientResult"
+          "$ref": "#/$defs/ClientResult"
         }
       },
       "required": [
@@ -690,7 +626,7 @@
         "roots": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Root"
+            "$ref": "#/$defs/Root"
           }
         }
       },
@@ -721,10 +657,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/CancelledNotificationMethod"
+          "$ref": "#/$defs/CancelledNotificationMethod"
         },
         "params": {
-          "$ref": "#/definitions/CancelledNotificationParam"
+          "$ref": "#/$defs/CancelledNotificationParam"
         }
       },
       "required": [
@@ -736,10 +672,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ProgressNotificationMethod"
+          "$ref": "#/$defs/ProgressNotificationMethod"
         },
         "params": {
-          "$ref": "#/definitions/ProgressNotificationParam"
+          "$ref": "#/$defs/ProgressNotificationParam"
         }
       },
       "required": [
@@ -751,7 +687,7 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/InitializedNotificationMethod"
+          "$ref": "#/$defs/InitializedNotificationMethod"
         }
       },
       "required": [
@@ -762,7 +698,7 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/RootsListChangedNotificationMethod"
+          "$ref": "#/$defs/RootsListChangedNotificationMethod"
         }
       },
       "required": [
@@ -816,7 +752,7 @@
           "format": "double"
         },
         "progressToken": {
-          "$ref": "#/definitions/ProgressToken"
+          "$ref": "#/$defs/ProgressToken"
         },
         "total": {
           "description": "Total number of items to process (or total progress required), if known",
@@ -834,11 +770,7 @@
     },
     "ProgressToken": {
       "description": "A token used to track the progress of long-running operations.\n\nProgress tokens allow clients and servers to associate progress notifications\nwith specific requests, enabling real-time updates on operation status.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/NumberOrString"
-        }
-      ]
+      "$ref": "#/$defs/NumberOrString"
     },
     "PromptReference": {
       "type": "object",
@@ -867,7 +799,7 @@
           "additionalProperties": true
         },
         "resource": {
-          "$ref": "#/definitions/ResourceContents"
+          "$ref": "#/$defs/ResourceContents"
         }
       },
       "required": [
@@ -986,11 +918,7 @@
               "const": "ref/resource"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/ResourceReference"
-            }
-          ],
+          "$ref": "#/$defs/ResourceReference",
           "required": [
             "type"
           ]
@@ -1003,11 +931,7 @@
               "const": "ref/prompt"
             }
           },
-          "allOf": [
-            {
-              "$ref": "#/definitions/PromptReference"
-            }
-          ],
+          "$ref": "#/$defs/PromptReference",
           "required": [
             "type"
           ]
@@ -1019,10 +943,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/InitializeResultMethod"
+          "$ref": "#/$defs/InitializeResultMethod"
         },
         "params": {
-          "$ref": "#/definitions/InitializeRequestParam"
+          "$ref": "#/$defs/InitializeRequestParam"
         }
       },
       "required": [
@@ -1035,10 +959,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/CompleteRequestMethod"
+          "$ref": "#/$defs/CompleteRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/CompleteRequestParam"
+          "$ref": "#/$defs/CompleteRequestParam"
         }
       },
       "required": [
@@ -1051,10 +975,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/SetLevelRequestMethod"
+          "$ref": "#/$defs/SetLevelRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/SetLevelRequestParam"
+          "$ref": "#/$defs/SetLevelRequestParam"
         }
       },
       "required": [
@@ -1067,10 +991,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/GetPromptRequestMethod"
+          "$ref": "#/$defs/GetPromptRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/GetPromptRequestParam"
+          "$ref": "#/$defs/GetPromptRequestParam"
         }
       },
       "required": [
@@ -1083,10 +1007,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ReadResourceRequestMethod"
+          "$ref": "#/$defs/ReadResourceRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/ReadResourceRequestParam"
+          "$ref": "#/$defs/ReadResourceRequestParam"
         }
       },
       "required": [
@@ -1099,10 +1023,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/SubscribeRequestMethod"
+          "$ref": "#/$defs/SubscribeRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/SubscribeRequestParam"
+          "$ref": "#/$defs/SubscribeRequestParam"
         }
       },
       "required": [
@@ -1115,10 +1039,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/UnsubscribeRequestMethod"
+          "$ref": "#/$defs/UnsubscribeRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/UnsubscribeRequestParam"
+          "$ref": "#/$defs/UnsubscribeRequestParam"
         }
       },
       "required": [
@@ -1131,10 +1055,10 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/CallToolRequestMethod"
+          "$ref": "#/$defs/CallToolRequestMethod"
         },
         "params": {
-          "$ref": "#/definitions/CallToolRequestParam"
+          "$ref": "#/$defs/CallToolRequestParam"
         }
       },
       "required": [
@@ -1146,7 +1070,7 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/PingRequestMethod"
+          "$ref": "#/$defs/PingRequestMethod"
         }
       },
       "required": [
@@ -1157,12 +1081,12 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ListPromptsRequestMethod"
+          "$ref": "#/$defs/ListPromptsRequestMethod"
         },
         "params": {
           "anyOf": [
             {
-              "$ref": "#/definitions/PaginatedRequestParam"
+              "$ref": "#/$defs/PaginatedRequestParam"
             },
             {
               "type": "null"
@@ -1178,12 +1102,12 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ListResourcesRequestMethod"
+          "$ref": "#/$defs/ListResourcesRequestMethod"
         },
         "params": {
           "anyOf": [
             {
-              "$ref": "#/definitions/PaginatedRequestParam"
+              "$ref": "#/$defs/PaginatedRequestParam"
             },
             {
               "type": "null"
@@ -1199,12 +1123,12 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ListResourceTemplatesRequestMethod"
+          "$ref": "#/$defs/ListResourceTemplatesRequestMethod"
         },
         "params": {
           "anyOf": [
             {
-              "$ref": "#/definitions/PaginatedRequestParam"
+              "$ref": "#/$defs/PaginatedRequestParam"
             },
             {
               "type": "null"
@@ -1220,12 +1144,12 @@
       "type": "object",
       "properties": {
         "method": {
-          "$ref": "#/definitions/ListToolsRequestMethod"
+          "$ref": "#/$defs/ListToolsRequestMethod"
         },
         "params": {
           "anyOf": [
             {
-              "$ref": "#/definitions/PaginatedRequestParam"
+              "$ref": "#/$defs/PaginatedRequestParam"
             },
             {
               "type": "null"
@@ -1367,11 +1291,7 @@
       "properties": {
         "level": {
           "description": "The desired logging level",
-          "allOf": [
-            {
-              "$ref": "#/definitions/LoggingLevel"
-            }
-          ]
+          "$ref": "#/$defs/LoggingLevel"
         }
       },
       "required": [

@@ -48,7 +48,7 @@ fn test_complex_schema() {
     let attr = Demo::chat_tool_attr();
     let input_schema = attr.input_schema;
     let enum_number = input_schema
-        .get("definitions")
+        .get("$defs")
         .unwrap()
         .as_object()
         .unwrap()
