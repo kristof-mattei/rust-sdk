@@ -594,7 +594,6 @@ where
                     });
                     // Stateless mode: no priming (no session to resume)
                     let stream = ReceiverStream::new(receiver).map(|message| {
-                        tracing::info!(?message);
                         ServerSseMessage {
                             event_id: None,
                             message: Some(Arc::new(message)),
