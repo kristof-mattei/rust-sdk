@@ -593,13 +593,10 @@ where
                         let _ = service.waiting().await;
                     });
                     // Stateless mode: no priming (no session to resume)
-                    let stream = ReceiverStream::new(receiver).map(|message| {
-                        tracing::info!(?message);
-                        ServerSseMessage {
-                            event_id: None,
-                            message: Some(Arc::new(message)),
-                            retry: None,
-                        }
+                    let stream = ReceiverStream::new(receiver).map(|message| ServerSseMessage {
+                        event_id: None,
+                        message: Some(Arc::new(message)),
+                        retry: None,
                     });
                     Ok(sse_stream_response(
                         stream,
